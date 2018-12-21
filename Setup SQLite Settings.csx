@@ -17,13 +17,29 @@ public static class log
         Console.ForegroundColor = System.ConsoleColor.Green;
         Console.WriteLine($"[{timeStamp()}][INFO] - {message}");
     }
+    
+    public static void error(string message)
+    {
+        Console.ForegroundColor = System.ConsoleColor.Red;
+        Console.WriteLine($"[{timeStamp()}][ERROR] - {message}");
+    }
 }
 
 void main() {
-    setupDatabase();   
+    try
+    {
+        setupDatabase(); 
+    }catch(Exception ex)
+    {
+        log.error($"General program exception occured; Exception: {ex}");
+    }
+      
 }
 
 void setupDatabase() {
+    int latestVersion = 0;
+    int databaseVersion = -1;
+    
     if( !netstandardDbSQLiteHelper.SystemQueries.doesTableExist(shared.db, "sys"))
     {
         shared.db.Command(@"
@@ -32,7 +48,17 @@ void setupDatabase() {
             )
         ");
         log.info("System Table Created");
+        databaseVersion = latestVersion;
+    }else
+    {
+        var rows = shared.db.Query(@"
+            select version
+            from sys
+        ");
+        
+        databaseVersion = Convert.ToInt32(rows[0]["version"]);
     }
+    log.info($"Sys version is [{databaseVersion}]");
 
     if( !netstandardDbSQLiteHelper.SystemQueries.doesTableExist(shared.db, "settings"))
     {
@@ -41,3 +67,6 @@ void setupDatabase() {
     
     // determine settings table version and do alter statements if necessary
 }
+
+
+main();
