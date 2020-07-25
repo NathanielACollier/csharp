@@ -30,6 +30,7 @@ await page.SetContentAsync(html: @"
         {{title}}
         <br />You've cliicked the button {{counter}} times.
         <br /><button type='button' v-on:click='onButton1Click'>Click Me!</button>
+        <br /><button type='button' v-on:click='quit'>Quit</button>
     </div>
 
     <script type='module'>
@@ -54,6 +55,9 @@ await page.SetContentAsync(html: @"
                     console.error('Something went wrong...');
                 });
                 console.log('funcTest1 should have been called');
+            },
+            quit: () => {
+                window.programDone = true;
             }
         }
     })
@@ -73,6 +77,10 @@ async Task waitForProgramEnd(){
     ");
 
     await page.WaitForExpressionAsync("window.programDone === true");
+    Console.WriteLine("Program finished triggered");
+    // program is done so close everything out
+    await page.CloseAsync();
+    await browser.CloseAsync();
 }
 
 
