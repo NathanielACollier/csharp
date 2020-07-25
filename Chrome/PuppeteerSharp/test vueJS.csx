@@ -60,3 +60,21 @@ await page.SetContentAsync(html: @"
     </script>
 ");
 
+
+
+async Task waitForProgramEnd(){
+    /*
+    This stuff keeps the browser open until our program is done.
+    */
+    await page.EvaluateFunctionAsync(@"
+        ()=> {
+            window.programDone = false;
+        }
+    ");
+
+    await page.WaitForExpressionAsync("window.programDone === true");
+}
+
+
+await waitForProgramEnd();
+
