@@ -1,6 +1,6 @@
-#r "$NuGet\Castle.Core\4.2.1\lib\net45\Castle.Core.dll"
-#r "$NuGet\Newtonsoft.Json\10.0.3\lib\net45\Newtonsoft.Json.dll"
-#r "$NuGet\Refit\4.0.1\lib\net45\Refit.dll"
+#r "nuget: Castle.Core, 4.2.1"
+#r "nuget: Newtonsoft.Json, 10.0.3"
+#r "nuget: Refit, 4.0.1"
 
 
 using Refit;
@@ -16,7 +16,8 @@ async Task Main()
 {
 	var api = ProxyRestService.For<AppleEntityLookupApi>("https://itunes.apple.com");
 	
-	(await api.GetPodCast("354869137")).Dump();
+	var result = await api.GetPodCast("354869137");
+	Console.WriteLine(result);
 }
 
 
