@@ -1,4 +1,4 @@
-#r "nuget:RazorEngine/3.10.0"
+#r "nuget:RazorEngine.NetCore, 3.1.0"
 
 // see: https://github.com/Antaris/RazorEngine
 
@@ -11,4 +11,4 @@ var result = Engine.Razor.RunCompile(templateSource: @"
 ", name: $"Template_{Guid.NewGuid()}",
 model: new { prop1="James" });
 
-result.Dump();
+Console.WriteLine(result);
