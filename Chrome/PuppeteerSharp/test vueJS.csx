@@ -13,6 +13,7 @@ var page = await browser.NewPageAsync();
 
 
 // found this example here: http://www.hardkoded.com/blog/creating-whatsapp-bot-puppteer-sharp
+// documentation is here: https://www.puppeteersharp.com/api/PuppeteerSharp.Page.html
 await page.ExposeFunctionAsync("funcTest1", ()=>{
     Console.WriteLine($"Function Test 1 Called");
 });
