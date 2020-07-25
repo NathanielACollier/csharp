@@ -11,6 +11,13 @@ var browser = await Puppeteer.LaunchAsync(new LaunchOptions
 
 var page = await browser.NewPageAsync();
 
+
+// found this example here: http://www.hardkoded.com/blog/creating-whatsapp-bot-puppteer-sharp
+await page.ExposeFunctionAsync("funcTest1", ()=>{
+    Console.WriteLine($"Function Test 1 Called");
+});
+
+
 /*
 See vue.js documentation here:
 https://vuejs.org/v2/guide/instance.html
@@ -20,6 +27,8 @@ https://vuejs.org/v2/guide/instance.html
 await page.SetContentAsync(html: @"
     <div id='displayDiv'>
         {{title}}
+        <br />You've cliicked the button {{counter}} times.
+        <br /><button type='button' v-on:click='onButton1Click'>Click Me!</button>
     </div>
 
     <script type='module'>
@@ -28,7 +37,23 @@ await page.SetContentAsync(html: @"
     let vm = new Vue({
         el: '#displayDiv',
         data:  {
-            title: 'Hello World!'
+            title: 'Hello World!',
+            counter: 0
+        },
+        methods: {
+            onButton1Click: () => {
+                console.log('Button was clicked');
+                vm.counter++;
+                console.log(vm);
+                console.log('Preparing to call funcTest1');
+                console.log(funcTest1);
+                funcTest1().then(() => {
+                    console.log('Success');
+                }, (err)=>{
+                    console.error('Something went wrong...');
+                });
+                console.log('funcTest1 should have been called');
+            }
         }
     })
     </script>
