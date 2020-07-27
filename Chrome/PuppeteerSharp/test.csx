@@ -6,10 +6,13 @@ using PuppeteerSharp;
 var browser = await Puppeteer.LaunchAsync(new LaunchOptions
 {
     Headless = false,
-    ExecutablePath = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    ExecutablePath = System.Diagnostics.Process.GetProcessesByName("chrome").First().Modules[0].FileName,
+    Args = new[]{ "--app=http://localhost/null" }
 });
 
-var page = await browser.NewPageAsync();
+var page = (await browser.PagesAsync())[0];
+await page.WaitForNavigationAsync();
+
 var response = await page.GoToAsync("https://www.google.com");
 
 Console.WriteLine($"Google response is {response.Status}");
