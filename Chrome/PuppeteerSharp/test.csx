@@ -2,7 +2,7 @@
 
 #load "../../module/chrome/PuppeteerUtility.csx"
 
-var page = await PuppeteerUtility.GetPage();
+var (page, browser) = await PuppeteerUtility.GetPage();
 
 var response = await page.GoToAsync("https://www.google.com");
 
