@@ -22,7 +22,7 @@ var browser = await Puppeteer.LaunchAsync(new LaunchOptions
 });
 
 var page = (await browser.PagesAsync())[0];
-await page.WaitForNavigationAsync();
+//await page.WaitForNavigationAsync();
 
 var response = await page.GoToAsync("https://www.google.com");
 
