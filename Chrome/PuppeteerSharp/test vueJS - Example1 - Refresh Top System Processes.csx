@@ -1,15 +1,8 @@
-#! "netcoreapp2.0"
-#r "nuget:PuppeteerSharp, 1.18.0"
+#load "../../module/chrome/PuppeteerUtility.csx"
 
 using PuppeteerSharp;
 
-var browser = await Puppeteer.LaunchAsync(new LaunchOptions
-{
-    Headless = false,
-    ExecutablePath = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-});
-
-var page = await browser.NewPageAsync();
+var (page, browser) = await PuppeteerUtility.GetPage();
 
 
 public class ProcessInfo{
