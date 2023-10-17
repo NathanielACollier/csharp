@@ -1,9 +1,8 @@
-#r "nuget: nac.Forms, 1.6.2"
+#r "nuget: nac.Forms, 2.0.3"
 
 using nac.Forms;
 
-var f = Avalonia.AppBuilder.Configure<nac.Forms.App>()
-                .NewForm();
+var f = nac.Forms.Form.NewForm();
                 
 f.Text("Hello World!")
 .Display();
