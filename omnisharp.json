@@ -1,7 +1,6 @@
 {
   "script": {
     "enableScriptNuGetReferences": true,
-    "defaultTargetFramework": "netcoreapp2.1",
-    "omnisharp.loggingLevel": "debug"
+    "defaultTargetFramework": "net8.0"
   }
 }
