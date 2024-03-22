@@ -1,8 +1,13 @@
-#r "nuget:netstandardDbSQLiteHelper/1.0.0.1"
+#r "nuget: nac.Database.SQLite, 1.1.0"
 
 public static class shared
 {
-    public static netstandardDbSQLiteHelper.Database db = new netstandardDbSQLiteHelper.Database(@"C:\temp\settings.db");
+    public static nac.Database.SQLite.Database db = new(
+        databaseFilePath: System.IO.Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "settings.db"
+        )
+    );
 }
 
 // temp log holder
@@ -40,7 +45,7 @@ void setupDatabase() {
     int latestVersion = 0;
     int databaseVersion = -1;
     
-    if( !netstandardDbSQLiteHelper.SystemQueries.doesTableExist(shared.db, "sys"))
+    if( !nac.Database.SQLite.SystemQueries.doesTableExist(shared.db, "sys"))
     {
         shared.db.Command(@"
             create table sys(
@@ -60,7 +65,7 @@ void setupDatabase() {
     }
     log.info($"Sys version is [{databaseVersion}]");
 
-    if( !netstandardDbSQLiteHelper.SystemQueries.doesTableExist(shared.db, "settings"))
+    if( !nac.Database.SQLite.SystemQueries.doesTableExist(shared.db, "settings"))
     {
         
     }
