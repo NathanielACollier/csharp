@@ -1,4 +1,4 @@
-#r "nuget: nac.Forms, 2.2.3"
+#r "nuget: nac.Forms,2.4.6"
 #r "nuget: nac.ViewModelBase, 1.0.1"
 
 using nac.Forms;
@@ -15,7 +15,7 @@ var model = new MainViewModel();
 f.DataContext = model;
                 
 f.HorizontalGroup(hg => {
-    hg.Button(b=> b.Text("Click me (").TextFor(nameof(MainViewModel.Count)).Text(")"), 
+    hg.Button(b=> b.Text("Click me (").TextFor(nameof(MainViewModel.Count), style: "color:blue;").Text(")"), 
         onClick: async () => {
             model.Count++;
         });
