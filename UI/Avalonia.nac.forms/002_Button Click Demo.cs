@@ -1,14 +1,7 @@
-#r "nuget: nac.Forms,2.4.6"
-#r "nuget: nac.ViewModelBase, 1.0.1"
+#:package nac.Forms@2.4.7
+#:package nac.ViewModelBase@1.0.1
 
 using nac.Forms;
-
-public class MainViewModel: nac.ViewModelBase.ViewModelBase{
-    public int Count {
-        get { return GetValue(() => Count);}
-        set { SetValue(() => Count, value);}
-    }
-}
 
 var f = nac.Forms.Form.NewForm();
 var model = new MainViewModel();
@@ -21,3 +14,11 @@ f.HorizontalGroup(hg => {
         });
 })
 .Display();
+
+
+public class MainViewModel: nac.ViewModelBase.ViewModelBase{
+    public int Count {
+        get { return GetValue(() => Count);}
+        set { SetValue(() => Count, value);}
+    }
+}
